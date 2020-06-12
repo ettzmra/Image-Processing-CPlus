@@ -1,0 +1,4 @@
+/home/barth/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/barth/CLionProjects/StrokeProcessing
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/barth/CLionProjects/StrokeProcessing/cmake-build-debug
