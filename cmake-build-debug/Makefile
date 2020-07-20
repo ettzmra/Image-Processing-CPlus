@@ -123,6 +123,33 @@ StrokeProcessing/fast:
 	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/build
 .PHONY : StrokeProcessing/fast
 
+imgProcessing.o: imgProcessing.cpp.o
+
+.PHONY : imgProcessing.o
+
+# target to build an object file
+imgProcessing.cpp.o:
+	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/imgProcessing.cpp.o
+.PHONY : imgProcessing.cpp.o
+
+imgProcessing.i: imgProcessing.cpp.i
+
+.PHONY : imgProcessing.i
+
+# target to preprocess a source file
+imgProcessing.cpp.i:
+	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/imgProcessing.cpp.i
+.PHONY : imgProcessing.cpp.i
+
+imgProcessing.s: imgProcessing.cpp.s
+
+.PHONY : imgProcessing.s
+
+# target to generate assembly for a file
+imgProcessing.cpp.s:
+	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/imgProcessing.cpp.s
+.PHONY : imgProcessing.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -150,6 +177,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+stroke_transformer.o: stroke_transformer.cpp.o
+
+.PHONY : stroke_transformer.o
+
+# target to build an object file
+stroke_transformer.cpp.o:
+	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/stroke_transformer.cpp.o
+.PHONY : stroke_transformer.cpp.o
+
+stroke_transformer.i: stroke_transformer.cpp.i
+
+.PHONY : stroke_transformer.i
+
+# target to preprocess a source file
+stroke_transformer.cpp.i:
+	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/stroke_transformer.cpp.i
+.PHONY : stroke_transformer.cpp.i
+
+stroke_transformer.s: stroke_transformer.cpp.s
+
+.PHONY : stroke_transformer.s
+
+# target to generate assembly for a file
+stroke_transformer.cpp.s:
+	$(MAKE) -f CMakeFiles/StrokeProcessing.dir/build.make CMakeFiles/StrokeProcessing.dir/stroke_transformer.cpp.s
+.PHONY : stroke_transformer.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... StrokeProcessing"
+	@echo "... imgProcessing.o"
+	@echo "... imgProcessing.i"
+	@echo "... imgProcessing.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... stroke_transformer.o"
+	@echo "... stroke_transformer.i"
+	@echo "... stroke_transformer.s"
 .PHONY : help
 
 

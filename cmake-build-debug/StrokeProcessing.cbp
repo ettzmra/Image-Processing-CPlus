@@ -94,7 +94,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/barth/CLionProjects/StrokeProcessing/imgProcessing.cpp">
+			<Option target="StrokeProcessing"/>
+		</Unit>
+		<Unit filename="/home/barth/CLionProjects/StrokeProcessing/imgProcessing.h">
+			<Option target="StrokeProcessing"/>
+		</Unit>
 		<Unit filename="/home/barth/CLionProjects/StrokeProcessing/main.cpp">
+			<Option target="StrokeProcessing"/>
+		</Unit>
+		<Unit filename="/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.cpp">
+			<Option target="StrokeProcessing"/>
+		</Unit>
+		<Unit filename="/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.h">
 			<Option target="StrokeProcessing"/>
 		</Unit>
 		<Unit filename="/home/barth/CLionProjects/StrokeProcessing/CMakeLists.txt">

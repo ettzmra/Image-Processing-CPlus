@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/barth/CLionProjects/StrokeProcessing/imgProcessing.cpp" "/home/barth/CLionProjects/StrokeProcessing/cmake-build-debug/CMakeFiles/StrokeProcessing.dir/imgProcessing.cpp.o"
   "/home/barth/CLionProjects/StrokeProcessing/main.cpp" "/home/barth/CLionProjects/StrokeProcessing/cmake-build-debug/CMakeFiles/StrokeProcessing.dir/main.cpp.o"
+  "/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.cpp" "/home/barth/CLionProjects/StrokeProcessing/cmake-build-debug/CMakeFiles/StrokeProcessing.dir/stroke_transformer.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

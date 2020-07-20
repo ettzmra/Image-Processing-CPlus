@@ -6,7 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/home/barth/CLionProjects/StrokeProcessing/imgProcessing.cpp
+imgProcessing.h
+/home/barth/CLionProjects/StrokeProcessing/imgProcessing.h
+
+/home/barth/CLionProjects/StrokeProcessing/imgProcessing.h
+stroke_transformer.h
+/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.h
+
 /home/barth/CLionProjects/StrokeProcessing/main.cpp
+imgProcessing.h
+/home/barth/CLionProjects/StrokeProcessing/imgProcessing.h
+stroke_transformer.h
+/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.h
+
+/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.cpp
+stroke_transformer.h
+/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.h
+
+/home/barth/CLionProjects/StrokeProcessing/stroke_transformer.h
 opencv2/opencv.hpp
 -
 opencv2/core.hpp

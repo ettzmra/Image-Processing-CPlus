@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/StrokeProcessing.dir/imgProcessing.cpp.o"
   "CMakeFiles/StrokeProcessing.dir/main.cpp.o"
+  "CMakeFiles/StrokeProcessing.dir/stroke_transformer.cpp.o"
   "StrokeProcessing"
   "StrokeProcessing.pdb"
 )

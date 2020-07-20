@@ -15,7 +15,7 @@ include_directories(include/)
 include_directories( ${OpenCV_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIR})
 
 
-add_executable(StrokeProcessing main.cpp)
+add_executable(StrokeProcessing main.cpp stroke_transformer.cpp stroke_transformer.h imgProcessing.cpp imgProcessing.h)
 
 target_include_directories( ${PROJECT_NAME}
         PUBLIC ${Boost_INCLUDE_DIRS}
