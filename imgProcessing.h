@@ -6,14 +6,22 @@
 
 #include "stroke_transformer.h"
 
-Mat binarize(Mat src);
+using namespace cv;
+using namespace std;
 
-vector<vector<Point>> truncateVectors(vector< vector<Point> > contours);
+class Process : Mat {
+public:
+    Mat img, canny;
+    Process(Mat src);
+    Mat binarize(ThresholdTypes flag = THRESH_BINARY, int blur=101);
+    Mat fillHoles(Mat binarized);
+    vector< vector<Point> > contours(Mat processedImg, vector<Vec4i>& hierarchy);
+    vector<vector<Point>> truncateVectors(vector<vector<Point> > &contours);
+};
 
-void draw_outputs(int output_num, vector<vector<Point>> truncVectors, vector<Vec4i> hierarchy, Mat output);
+void draw_outputs(int output_num, vector<vector<Point>> &truncVectors, vector<Vec4i>& hierarchy, Mat canny);
 
-void points_to_ped(string name, int img_num, vector < vector<Point> > vectors);
-
+void points_to_ped(string name, int img_num, vector<vector<Point> > vectors);
 
 
 #endif //STROKEPROCESSING_IMGPROCESSING_H

@@ -2,39 +2,71 @@
 #include "imgProcessing.h"
 #include "stroke_transformer.h"
 
-
-
 int main()
 {
-    int count = 0;
+    int count = 1;
     for(auto& file : directory_iterator("cmake-build-debug/strokes_images")) {  // loop through the directory where the original stroke images are located.
-        Mat src, canny, binarized, dilated, eroded;
-        src = imread(file.path().string(), 1); // Read the file
+        Mat src = imread(file.path().string(), 1); // Read the file
+        CenterLine c;
+        vector< vector<Point> > pts = c.transform(src);
+//        Mat output(src.size(), CV_8UC3, Scalar(255,255,255));
+//        for (int i = 0; i < pts[0].size() - 1; i++) {
+//            cv::line(output, pts[0][i], pts[0][i + 1], Scalar(0, 0, 0), 2, LINE_8);
+//            cv::circle(output, pts[0][i], 4, Scalar(0, 0, 0), FILLED, LINE_8);
+//        }
+//        namedWindow("bin", WINDOW_NORMAL);
+//        imshow("bin", output);
+//        waitKey();
+//        imwrite("output images/center_line" + to_string(count) + ".jpg", output);
 
-        binarized = binarize(src);
-        namedWindow("bin", WINDOW_NORMAL);
+//        Mat skel = Mat (binarized.rows, binarized.cols, CV_8UC1, Scalar (0,0,0));
+//        int size = src.cols * src.rows;
+//        int zeros = 0;
+//        bool done = false;
+//        while(!done)
+//        {
+//            erode(binarized, eroded, element);
+//            dilate(eroded, dilated, element);
+//            subtract(binarized, dilated, dilated);
+//            bitwise_or(skel, dilated, skel);
+//            dilated.copyTo(binarized);
+//
+//            zeros = size - countNonZero(binarized);
+//            if(zeros == size)
+//                done = true;
+//        }
+//        threshold(skel, skel, 170, 255, THRESH_BINARY_INV);
+
+
+        //       Gestalt g;
+ //       vector< vector<Point> > pts = g.transform(eroded);
+
+//        namedWindow("bin", WINDOW_NORMAL);
 //        imshow("bin", binarized);
 //        waitKey();
-
-        Mat erode_kernel = getStructuringElement( MORPH_RECT, Size(9,9), Point(2, 2) );
-        Mat dilate_kernel = getStructuringElement( MORPH_RECT, Size(21,21), Point(2, 2) );
-        dilate(binarized, dilated, dilate_kernel);
-        erode(dilated, eroded, erode_kernel);
-        Gestalt g;
-        vector< vector<Point> > pts = g.transform(eroded);
+//        namedWindow("dil", WINDOW_NORMAL);
+//        imshow("dil", dilated);
+//        waitKey();
+//        namedWindow("er", WINDOW_NORMAL);
+//        imshow("er", eroded);
+//        waitKey();
+//        namedWindow("skel", WINDOW_NORMAL);
+//        imshow("skel", skel);
+//        waitKey();
 
 //        Mat img( 4000, 4000, CV_8UC3, Scalar(255,255,255));
 
-//        Canny( eroded, canny, 170, 255 );
-//        vector< vector<Point> > contours;
-//        vector<Vec4i> hierarchy;
 //        findContours( canny, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE );
 //        vector< vector<Point> > refined_vectors = truncateVectors(contours);
 //        Mat contoured(canny.size(), CV_8UC3, Scalar(255,255,255));
-//        draw_outline(count, refined_vectors, hierarchy, contoured);
+//        string s = "skeleton";
+//        draw_outputs(count, contours, hierarchy, contoured);
+//        findContours( skel, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE );
+//        vector< vector<Point> > refined_vectors = truncateVectors(contours);
+//        draw_outputs(count, contours, hierarchy, contoured);
 
         count++;
-        points_to_ped("triangles", count, pts);
+//        points_to_ped("triangles", count, pts);
 
 
 
