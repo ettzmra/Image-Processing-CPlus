@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(Boost 1.65.1 REQUIRED COMPONENTS filesystem )
 
 # Opencv
-find_package(OpenCV 4.2.0 REQUIRED core imgproc imgcodecs highgui)
+find_package(OpenCV 4.2.0 REQUIRED core imgproc imgcodecs highgui ximgproc)
 
 # Eigen3
 find_package(Eigen3 REQUIRED)

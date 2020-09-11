@@ -23,5 +23,9 @@ void draw_outputs(int output_num, vector<vector<Point>> &truncVectors, vector<Ve
 
 void points_to_ped(string name, int img_num, vector<vector<Point> > vectors);
 
+vector<Point> skeletonEndPoints(Mat& src);
+vector<Point> skeletonCrossPoints(Mat& src);
+Point neighborPixel(Mat& src, Point p);
+void walkNeighbours(Mat& src, vector<Point>& endPts, vector< vector<Point> >& v);
 
 #endif //STROKEPROCESSING_IMGPROCESSING_H

@@ -101,3 +101,133 @@ void points_to_ped(string name, int img_num, vector < vector<Point> >& vectors){
     ped.close();
 }
 
+vector<Point> skeletonEndPoints(Mat& src) {
+    vector<Point> endPts;
+
+    for(int y = 1; y < src.cols-2; y++) {
+        for (int x = 1; x < src.rows-2; x++) {
+            Vec3b pxl = src.at<Vec3b>(x,y);
+            int count = 0;
+            vector<Point> neighborPxls;
+            bool hitCanvas = false;
+            if (pxl == Vec3b(255,255,255)) {
+                for (int i = -1; i <= 1; i++) {
+                    for (int e = -1; e <= 1; e++) {
+                        Vec3b neighborPxl = src.at<Vec3b>(x+e,y+i);
+                        Point neighborPt = Point(x+e, y+i);
+                        if (neighborPxl == Vec3b(255,255,255) && !(i == 0 && e == 0)) {
+                            neighborPxls.push_back(Point(x + e, y + i));
+                            if((neighborPt.x == (src.rows-1)) || (neighborPt.y == (src.cols-1))) {
+                                hitCanvas = true;
+                            }
+                            count++;
+                        }
+                    }
+                }
+            }
+            if (((count == 1) && (x != (src.rows-1)) && (y != (src.cols-1))) || hitCanvas) {
+                src.at<Vec3b>(x, y) = Vec3b(0,255,0);
+                endPts.push_back(Point(x,y));
+            }
+        }
+    }
+    return endPts;
+}
+
+Point neighborPixel(Mat& src, Point p) {
+    vector<Point> neighbors;
+    for (int i = -1; i <= 1; i++) {
+        for (int e = -1; e <= 1; e++) {
+            Vec3b pxl = src.at<Vec3b>(p.x+e,p.y+i);
+            Point pxlPt = Point(p.x + e, p.y + i);
+            if (pxl == Vec3b(255,255,255) && !(i == 0 && e == 0)) {
+                neighbors.push_back(pxlPt);
+            }
+        }
+    }
+    if(neighbors.empty()) return p;
+    vector<int> count;
+    for(Point pt : neighbors) {
+        int c;
+        for (int i = -1; i <= 1; i++) {
+            for (int e = -1; e <= 1; e++) {
+                Vec3b pxl = src.at<Vec3b>(pt.x+e,pt.y+i);
+                if (pxl == Vec3b(255,255,255) && !(i == 0 && e == 0)) c++;
+            }
+        }
+        count.push_back(c);
+    }
+    int max = 0;
+    int idx = 0;
+    for(int i = 0; i < count.size(); i++) {
+        if(count[i] > max) {
+            max = count[i];
+            idx = i;
+        }
+    }
+    return neighbors[idx];
+}
+
+void walkNeighbours(Mat& src, vector<Point>& endPts, vector< vector<Point> >& v) {
+    for(Point pt : endPts) {
+        if(src.at<Vec3b>(pt) == Vec3b(0, 0, 255)) continue;
+        else {
+            vector<Point> points;
+            src.at<Vec3b>(pt.x,pt.y) = Vec3b(0, 0, 255);
+            points.push_back(pt);
+            Point neighbour = neighborPixel(src, pt);
+            while (find(endPts.begin(), endPts.end(), neighbour) == endPts.end()) {
+                src.at<Vec3b>(neighbour.x, neighbour.y) = Vec3b(0, 0, 255);
+                points.push_back(neighbour);
+                pt = neighbour;
+                neighbour = neighborPixel(src, pt);
+                if(neighbour == pt) break;
+            }
+            v.push_back(points);
+        }
+    }
+}
+
+vector<Point> skeletonCrossPoints(Mat& src) {
+    vector<Point> crossPts;
+
+    int rows = src.rows;
+    int cols = src.cols;
+
+    for(int y = 1; y < cols-1; y++) {
+        for (int x = 1; x < rows - 1; x++) {
+            Vec3b pxl = src.at<Vec3b>(x,y);
+            vector<Point> neighborPxls;
+            if (pxl == Vec3b(255,255,255)) {
+                for (int i = -1; i <= 1; i++) {
+                    for (int e = -1; e <= 1; e++) {
+                        Vec3b neighborPxl = src.at<Vec3b>(x+e,y+i);
+                        if (neighborPxl != Vec3b(0,0,0) && !(i == 0 && e == 0)) {
+                            neighborPxls.push_back(Point(x + e, y + i));
+                        }
+                    }
+                }
+            }
+            if (neighborPxls.size() > 2) {
+                for(auto each : neighborPxls) {
+                    int count = 0;
+                    for (int i = -1; i <= 1; i++) {
+                        for (int e = -1; e <= 1; e++) {
+                            Vec3b neighbor = src.at<Vec3b>(each.x + e, each.y + i);
+                            if (neighbor != Vec3b(0, 0, 0) && !(i == 0 && e == 0)) {
+                                count++;
+                            }
+                        }
+                    }
+                    if (count == 2) {
+                        if(find(crossPts.begin(), crossPts.end(), Point(x,y)) == crossPts.end()) {
+                            src.at<Vec3b>(x, y) = Vec3b(0, 0, 255);
+                            crossPts.push_back(Point(x, y));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return crossPts;
+}

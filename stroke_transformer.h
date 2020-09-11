@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <Eigen/Geometry>
 #include <string>
+#include <assert.h>
 #include "imgProcessing.h"
 
 

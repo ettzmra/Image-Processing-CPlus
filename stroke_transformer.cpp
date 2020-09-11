@@ -1,8 +1,11 @@
 // Created by barth on 15.06.2020.
 
 #include "stroke_transformer.h"
+#include <cstdlib>
+
 
 vector< vector<Point> > CenterLine::transform(Mat src) {
+    assert(src.channels() == 3);
     Process img(src);
     Mat binarized = img.binarize(THRESH_BINARY_INV, 101);
     Mat processedImg;
@@ -10,62 +13,32 @@ vector< vector<Point> > CenterLine::transform(Mat src) {
     morphologyEx(binarized, processedImg, MORPH_CLOSE, dilate_kernel, Point(-1,-1), 21);
     morphologyEx(processedImg, processedImg, MORPH_OPEN, dilate_kernel, Point(-1,-1), 21);
     ximgproc::thinning(processedImg, processedImg);
-//    threshold(processedImg, processedImg, 170, 255, THRESH_BINARY);
-//    namedWindow("bin", WINDOW_NORMAL);
-//    imshow("bin", processedImg);
-//    waitKey();
+    cv::cvtColor(processedImg, processedImg, cv::COLOR_GRAY2BGR);
 
+    int rows = src.rows;
+    int cols = src.cols;
     vector< vector<Point> > vecs;
-    vector<Point> endPts, crossPts, midPts;
+    vector<Point> endPoints1 = skeletonEndPoints(processedImg);
+    walkNeighbours(processedImg, endPoints1, vecs);
 
-    int channels = processedImg.channels();
-    cout << "yes" << to_string(channels);
-
-    int rows = processedImg.rows;
-    int cols = processedImg.cols * channels;
-    int x = 1;
-    int y = 1;
-   // uchar& pxl = processedImg.at<uchar>(x, y);
-   // cout << pxl;
-
-//    while((y < cols-1) && (x < rows-1)) {
-//        Vec3b& pxl = processedImg.at<uchar>(x, y);
-//        int count = 0;
-//        vector<Point> neighborPxls;
-//        if(pxl == Vec3b(255,255,255)) {
-//            for (int i = -1; i <= 1; i++) {
-//                for (int e = -1; e <= 1; e++) {
-//                    Vec3b &pxlColor = processedImg.at<Vec3b>(x + e, y + i);
-//                    if ((pxlColor == Vec3b(255, 255, 255)) && !(i == 0 && e == 0)) {
-//                        neighborPxls.push_back(Point(x + e, y + i));
-//                        count++;
-//                    }
-//                }
+//    int count = 0;
+//    for (int y = 1; y < cols - 1; y++) {
+//        for (int x = 1; x < rows - 1; x++) {
+//            Vec3b pxl = src.at<Vec3b>(x, y);
+//            if (pxl == Vec3b(255, 255, 255)) {
+//                count++;
 //            }
-//            //Vec3b &color = processedImg.at<Vec3b>(x, y);
-//            if (count == 1) {
-//                Vec3b color = Vec3b(0, 255, 0);
-//                processedImg.at<Vec3b>(Point(x,y)) = color;
-//            } else if (count == 2) {
-//                Vec3b color = Vec3b(255, 255, 0);
-//                processedImg.at<Vec3b>(Point(x,y)) = color;
-//            } else if (count > 3) {
-//                Vec3b color = Vec3b(255, 0, 0);
-//                processedImg.at<Vec3b>(Point(x,y)) = color;
-//                crossPts.push_back(Point(x, y));
-//            }
-//            if (neighborPxls.empty()) {
-//                x++;
-//                y++;
-//            } else {
-//                x = neighborPxls[0].x;
-//                y = neighborPxls[0].y;
-//            }
-//        } else {x++; y++;}
+//        }
 //    }
-//    namedWindow("bin", WINDOW_NORMAL);
-//    imshow("bin", processedImg);
-//    waitKey();
+//    if (count > 50) {
+//        vector<Point> endPoints2 = skeletonEndPoints(processedImg);
+//        walkNeighbours(processedImg, endPoints2, vecs);
+//    }
+
+    //namedWindow("bin", WINDOW_NORMAL);
+   // if(boost::filesystem::exists("bin.png"))
+    int c = rand();
+    imwrite(to_string(c) + "bin.png", processedImg);
 
     return vecs;
 }
